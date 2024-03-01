@@ -1,6 +1,8 @@
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_community.document_loaders import WebBaseLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 
 def get_response(user_input):
     return "I don't know the answer to that question."
@@ -8,9 +10,14 @@ def get_response(user_input):
 def get_vectorestore_from_url(url):
     #get the text in document form
     loader = WebBaseLoader(url)
-    documents = loader.load()
+    document = loader.load()
 
-    return documents
+    #split the document into chunks
+    text_splitter = RecursiveCharacterTextSplitter()
+    document_chunks = text_splitter.split_documents(document)
+
+    return document_chunks
+
 #app configuration
 st.set_page_config(page_title="Chat with website", page_icon="🤖")
 st.title("Chat With Websites")
@@ -29,9 +36,9 @@ if website_url is not None and website_url == "":
     st.info("Please enter a valid website URL")
 
 else:
-    documents = get_vectorestore_from_url(website_url)
+    document_chunks = get_vectorestore_from_url(website_url)
     with st.sidebar:
-     st.write(documents)
+     st.write(document_chunks)
 
     #user input
     user_query = st.chat_input("Type your message here")
