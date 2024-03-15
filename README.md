@@ -33,6 +33,10 @@ This project is a web-based application designed to leverage advanced language m
   
 - **Retrieval-Augmented Generation (RAG):**  The chatbot will use a Retrieval-Augmented Generation approach, where the LLM's responses are informed by the information retrieved from the website content, ensuring that the chatbot's replies are both informative and up-to-date.
 
+## RAG Diagram
+
+![RAG Diagram](docs/WebWise-RAG-Diagram.jpg)
+
 ## Outcomes
 
 - A fully functional chatbot capable of providing accurate and contextually relevant information sourced from websites in real-time.
@@ -68,6 +72,13 @@ To run the Streamlit app:
 streamlit run app.py
 ```
 
+## Dependencies
+
+- Streamlit
+- OpenAI
+- Chroma DB
+- Beautiful Soup
+- Python-dotenv
 
 
 
